@@ -1,6 +1,17 @@
-export const Input = ({ changeName }) => {
+import style from './Input.module.css'
+export const Input = ({ changeAuthor, changeMessage, placeholder, data }) => {
   function changeInput(ev) {
-    changeName(ev.target.value)
+    changeAuthor
+      ? changeAuthor((p) => ({ ...p, author: ev.target.value }))
+      : changeMessage((p) => ({ ...p, text: ev.target.value }))
   }
-  return <input type="text" onChange={changeInput} />
+  return (
+    <input
+      className={style.input}
+      value={data}
+      placeholder={placeholder}
+      type="text"
+      onChange={changeInput}
+    />
+  )
 }
