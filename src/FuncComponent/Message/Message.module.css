@@ -12,7 +12,6 @@
 }
 .messageBlock {
   box-sizing: border-box;
-  border-radius: 4px;
   background-color: rgb(209, 202, 202);
   align-items: flex-end;
   max-width: 50%;
@@ -25,16 +24,14 @@
 .messageBlockRobot {
   align-self: flex-start;
 }
-
 .messageAuthor {
   margin-right: 5px;
   font-weight: bold;
+  overflow-wrap: break-word;
 }
-
 .messageText {
   overflow-wrap: break-word;
 }
-
 .messageDate {
   color: rgb(72, 65, 65);
   font-size: 12px;

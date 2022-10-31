@@ -1,8 +1,10 @@
 import { Message as FuncMessage } from '../Message/Message'
 import { Input as FuncInput } from '../Input/Input'
-import { Button } from '../Button/Button'
-import { useEffect, useState } from 'react'
+// import { Button } from '../Button/Button'
+import { useEffect, useState, useRef } from 'react'
 import style from './Form.module.css'
+import { Button } from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
 
 export const Form = () => {
   const [message, setMessage] = useState({
@@ -12,10 +14,10 @@ export const Form = () => {
   })
   const [messageList, setMessageList] = useState([])
   const RBT_MSG = 'Hello.I am robot.'
+  const ref = useRef(null)
 
   const handleClick = (e) => {
     e.preventDefault()
-
     const time = new Date()
     setMessageList((prev) => [
       ...prev,
@@ -48,13 +50,22 @@ export const Form = () => {
           data={message.author}
           placeholder="Имя"
           changeAuthor={setMessage}
+          focus={messageList}
         />
         <FuncInput
           data={message.text}
           placeholder="Введите сообщение"
           changeMessage={setMessage}
         />
-        <Button />
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          endIcon={<SendIcon />}
+          disabled={!(message.author && message.text)}
+        >
+          Send
+        </Button>
+        {/* <Button /> */}
       </div>
     </form>
   )

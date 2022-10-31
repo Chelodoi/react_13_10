@@ -1,5 +1,5 @@
-import { Form } from './FuncComponent/Form/Form'
+import { Chat } from './FuncComponent/Chat/Chat'
 
 export const App = () => {
-  return <Form />
+  return <Chat />
 }

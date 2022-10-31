@@ -3,8 +3,9 @@ import style from './Message.module.css'
 export const Message = (props) => {
   return (
     <div className={style.message}>
-      {props.messages.map((item) => (
+      {props.messages.map((item, id) => (
         <div
+          key={id}
           className={style.messageBlock}
           // item.author === 'Robot' ? style.messageBlockRobot : null)
         >
