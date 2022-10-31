@@ -1,0 +1,38 @@
+.message {
+  width: 100%;
+  color: #2a5885;
+  box-sizing: border-box;
+  height: 94%;
+  font-size: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow-y: auto;
+}
+.messageBlock {
+  box-sizing: border-box;
+  background-color: rgb(209, 202, 202);
+  align-items: flex-end;
+  max-width: 50%;
+  border-radius: 20px;
+  padding: 7px;
+  box-shadow: 3px 3px 6px;
+  align-self: flex-end;
+  margin: 6px;
+}
+.messageBlockRobot {
+  align-self: flex-start;
+}
+.messageAuthor {
+  margin-right: 5px;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+.messageText {
+  overflow-wrap: break-word;
+}
+.messageDate {
+  color: rgb(72, 65, 65);
+  font-size: 12px;
+}
