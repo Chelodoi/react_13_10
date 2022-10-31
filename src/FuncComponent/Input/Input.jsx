@@ -1,4 +1,6 @@
 import style from './Input.module.css'
+import React from 'react'
+
 export const Input = ({ changeAuthor, changeMessage, placeholder, data }) => {
   function changeInput(ev) {
     changeAuthor

@@ -3,6 +3,7 @@ import { Input as FuncInput } from '../Input/Input'
 import { Button } from '../Button/Button'
 import { useEffect, useState } from 'react'
 import style from './Form.module.css'
+import React from 'react'
 
 export const Form = () => {
   const [message, setMessage] = useState({
