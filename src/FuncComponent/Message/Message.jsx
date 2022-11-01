@@ -1,11 +1,12 @@
-import style from './Message.module.css'
-import React from 'react'
+import style from './Message.module.css';
+import React from 'react';
 
 export const Message = (props) => {
   return (
     <div className={style.message}>
-      {props.messages.map((item) => (
+      {props.messages.map((item, idx) => (
         <div
+          key={idx}
           className={style.messageBlock}
           // item.author === 'Robot' ? style.messageBlockRobot : null)
         >
@@ -17,5 +18,5 @@ export const Message = (props) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};

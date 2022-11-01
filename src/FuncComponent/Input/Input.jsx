@@ -1,11 +1,11 @@
-import style from './Input.module.css'
-import React from 'react'
+import style from './Input.module.css';
+import React from 'react';
 
 export const Input = ({ changeAuthor, changeMessage, placeholder, data }) => {
   function changeInput(ev) {
     changeAuthor
       ? changeAuthor((p) => ({ ...p, author: ev.target.value }))
-      : changeMessage((p) => ({ ...p, text: ev.target.value }))
+      : changeMessage((p) => ({ ...p, text: ev.target.value }));
   }
   return (
     <input
@@ -15,5 +15,5 @@ export const Input = ({ changeAuthor, changeMessage, placeholder, data }) => {
       type="text"
       onChange={changeInput}
     />
-  )
-}
+  );
+};
