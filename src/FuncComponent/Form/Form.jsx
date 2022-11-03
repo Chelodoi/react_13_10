@@ -1,5 +1,5 @@
-import { Message as FuncMessage } from '../Message/Message'
-import { Input as FuncInput } from '../Input/Input'
+import { Message } from '../Message/Message'
+import { Input } from '../Input/Input'
 import { Button } from '../Button/Button'
 import { useEffect, useState } from 'react'
 import style from './Form.module.css'
@@ -46,14 +46,14 @@ export const Form = () => {
 
   return (
     <form className={style.form} action="" onSubmit={handleClick}>
-      <FuncMessage messages={messageList} />
+      <Message messages={messageList} />
       <div className={style.formFunc}>
-        <FuncInput
+        <Input
           data={message.author}
           placeholder="Введите имя"
           changeAuthor={setMessage}
         />
-        <FuncInput
+        <Input
           data={message.text}
           placeholder="Введите сообщение"
           changeMessage={setMessage}

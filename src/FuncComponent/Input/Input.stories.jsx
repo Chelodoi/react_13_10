@@ -23,15 +23,13 @@ export default {
 }
 const Template = (args) => <Input {...args} />
 
-export const authorInput = Template.bind({})
+export const AuthorInput = Template.bind({})
 
-authorInput.args = {
-  // data: '',
+AuthorInput.args = {
   placeholder: 'Введите имя',
 }
 
-export const messageInput = Template.bind({})
-messageInput.args = {
-  // data: '',
+export const MessageInput = Template.bind({})
+MessageInput.args = {
   placeholder: 'Введите сообщение',
 }
