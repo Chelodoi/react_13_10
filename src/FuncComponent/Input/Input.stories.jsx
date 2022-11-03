@@ -1,6 +1,6 @@
-import React from 'react'
-import './Input.module.css'
-import { Input } from './Input'
+import React from 'react';
+import './Input.module.css';
+import { Input } from './Input';
 
 export default {
   title: 'MyComponents/Input',
@@ -20,16 +20,16 @@ export default {
       },
     },
   },
-}
-const Template = (args) => <Input {...args} />
+};
+const Template = (args) => <Input {...args} />;
 
-export const AuthorInput = Template.bind({})
+export const AuthorInput = Template.bind({});
 
 AuthorInput.args = {
   placeholder: 'Введите имя',
-}
+};
 
-export const MessageInput = Template.bind({})
+export const MessageInput = Template.bind({});
 MessageInput.args = {
   placeholder: 'Введите сообщение',
-}
+};
