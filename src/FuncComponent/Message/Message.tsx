@@ -1,12 +1,20 @@
-import style from './Message.module.css';
-import React from 'react';
-
-export const Message = (props) => {
+import style from './Message.module.css'
+import React, { FC } from 'react'
+import { nanoid } from 'nanoid'
+interface Message {
+  author: string
+  text: string
+  date: string
+}
+interface MessageProps {
+  messages: Message[]
+}
+export const Message: FC<MessageProps> = ({ messages }) => {
   return (
     <div className={style.message}>
-      {props.messages.map((item, idx) => (
+      {messages.map((item) => (
         <div
-          key={idx}
+          key={nanoid()}
           className={style.messageBlock}
           // item.author === 'Robot' ? style.messageBlockRobot : null)
         >
@@ -18,5 +26,5 @@ export const Message = (props) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
