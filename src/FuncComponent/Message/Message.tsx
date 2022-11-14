@@ -1,13 +1,13 @@
-import style from './Message.module.css'
-import React, { FC } from 'react'
-import { nanoid } from 'nanoid'
+import style from './Message.module.css';
+import React, { FC } from 'react';
+import { nanoid } from 'nanoid';
 interface Message {
-  author: string
-  text: string
-  date: string
+  author: string;
+  text: string;
+  date: string;
 }
 interface MessageProps {
-  messages: Message[]
+  messages: Message[];
 }
 export const Message: FC<MessageProps> = ({ messages }) => {
   return (
@@ -26,5 +26,5 @@ export const Message: FC<MessageProps> = ({ messages }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};

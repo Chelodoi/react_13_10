@@ -3,7 +3,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import '@testing-library/dom'
-import userEvent from '@testing-library/user-event'
+// import userEvent from '@testing-library/user-event'
 
 describe('Button', () => {
   it('render component', () => {
@@ -32,7 +32,7 @@ describe('Button', () => {
 
   // it('button click with userEvent', () => {
   //   const mockHandler = jest.fn()
-  //   render(<Button disabled={false} onClick={mockHandler} />)
+  //   render(<Button disabled={false} />)
   //   screen.debug()
   //   userEvent.click(screen.getByText(/Отправить/))
   //   expect(mockHandler).toBeCalledTimes(1)

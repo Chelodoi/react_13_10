@@ -1,6 +1,6 @@
-import React from 'react'
-import { Button } from './Button'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import React from 'react';
+import { Button } from './Button';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 export default {
   title: 'MyComponents/Button',
   component: Button,
@@ -18,16 +18,16 @@ export default {
       defaultValue: true,
     },
   },
-} as ComponentMeta<typeof Button>
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
+} as ComponentMeta<typeof Button>;
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const Primary = Template.bind({})
+export const Primary = Template.bind({});
 
 Primary.args = {
   disabled: false,
-}
+};
 
-export const Disabled = Template.bind({})
+export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
-}
+};
