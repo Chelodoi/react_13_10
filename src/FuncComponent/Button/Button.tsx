@@ -1,8 +1,8 @@
-import style from './Button.module.css'
-import React, { FC } from 'react'
+import style from './Button.module.css';
+import React, { FC } from 'react';
 
 interface ButtonProps {
-  disabled: boolean
+  disabled: boolean;
 }
 export const Button: FC<ButtonProps> = ({ disabled }) => {
   return (
@@ -14,5 +14,5 @@ export const Button: FC<ButtonProps> = ({ disabled }) => {
     >
       Отправить
     </button>
-  )
-}
+  );
+};
