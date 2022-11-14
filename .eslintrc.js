@@ -36,6 +36,8 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     quotes: ['warn', 'single'],
     semi: ['warn', 'always'], //точка с запятой
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
   },
 
   overrides: [

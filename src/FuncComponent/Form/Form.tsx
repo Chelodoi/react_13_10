@@ -1,14 +1,14 @@
-import { Message } from '../Message/Message';
-import { Input } from '../Input/Input';
-import { Button } from '../Button/Button';
-import { useEffect, useState } from 'react';
-import style from './Form.module.css';
-import React, { FC } from 'react';
+import { Message } from '../Message/Message'
+import { Input } from '../Input/Input'
+import { Button } from '../Button/Button'
+import { useEffect, useState } from 'react'
+import style from './Form.module.css'
+import React, { FC } from 'react'
 
 interface Message {
-  author: string;
-  text: string;
-  date: string;
+  author: string
+  text: string
+  date: string
 }
 
 export const Form: FC = () => {
@@ -16,39 +16,39 @@ export const Form: FC = () => {
     author: '',
     text: '',
     date: '',
-  });
-  const [messageList, setMessageList] = useState<Message[]>([]);
-  const RBT_MSG = 'Hello.I am robot.';
+  })
+  const [messageList, setMessageList] = useState<Message[]>([])
+  const RBT_MSG = 'Hello.I am robot.'
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const time = new Date();
+    const time = new Date()
     setMessageList((prev) => [
       ...prev,
       { ...message, author: 'User', date: time.toLocaleTimeString() },
-    ]);
+    ])
     setMessage({
       author: '',
       text: '',
       date: '',
-    });
-  };
+    })
+  }
 
   useEffect(() => {
     if (messageList.length > 0 && messageList.slice(-1)[0].author !== 'Robot') {
-      const time = new Date();
+      const time = new Date()
       const timeout = setTimeout(() => {
         setMessageList((prev) => [
           ...prev,
           { author: 'Robot', text: RBT_MSG, date: time.toLocaleTimeString() },
-        ]);
-      }, 1500);
+        ])
+      }, 1500)
       return () => {
-        clearTimeout(timeout);
-      };
+        clearTimeout(timeout)
+      }
     }
-  }, [messageList]);
+  }, [messageList])
 
   return (
     <form className={style.form} action="" onSubmit={handleClick}>
@@ -62,5 +62,5 @@ export const Form: FC = () => {
         <Button disabled={!message.text} />
       </div>
     </form>
-  );
-};
+  )
+}
