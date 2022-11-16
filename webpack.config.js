@@ -11,6 +11,14 @@ module.exports = {
     extensions: ['.jsx', '.js', '.tsx', '.ts'],
   },
   devtool: 'eval-source-map',
+  devServer: {
+    compress: true,
+    port: 8000,
+    client: {
+      logging: 'info',
+    },
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
