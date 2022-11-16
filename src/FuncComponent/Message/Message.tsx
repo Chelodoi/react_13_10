@@ -1,23 +1,21 @@
-import style from './Message.module.css';
-import React, { FC } from 'react';
-import { nanoid } from 'nanoid';
+import style from './Message.module.css'
+import React, { FC } from 'react'
+import { nanoid } from 'nanoid'
+import { MessageList } from '../../App'
 interface Message {
-  author: string;
-  text: string;
-  date: string;
+  author: string
+  text: string
+  date: string
 }
 interface MessageProps {
-  messages: Message[];
+  messages: MessageList
+  chatId: string
 }
-export const Message: FC<MessageProps> = ({ messages }) => {
+export const Message: FC<MessageProps> = ({ messages, chatId }) => {
   return (
     <div className={style.message}>
-      {messages.map((item) => (
-        <div
-          key={nanoid()}
-          className={style.messageBlock}
-          // item.author === 'Robot' ? style.messageBlockRobot : null)
-        >
+      {messages[chatId].map((item) => (
+        <div key={nanoid()} className={style.messageBlock}>
           <div className={style.messageBlockTop}>
             <span className={style.messageAuthor}>{item.author}</span>
             <span className={style.messageDate}>{item.date}</span>
@@ -26,5 +24,5 @@ export const Message: FC<MessageProps> = ({ messages }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}

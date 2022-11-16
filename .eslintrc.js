@@ -8,14 +8,15 @@ module.exports = {
   extends: [
     'prettier',
     'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     'prettier',
     'plugin:react-hooks/recommended',
     'plugin:storybook/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
   ],
+
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -37,7 +38,7 @@ module.exports = {
     quotes: ['warn', 'single'],
     semi: ['warn', 'always'], //точка с запятой
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 
   overrides: [

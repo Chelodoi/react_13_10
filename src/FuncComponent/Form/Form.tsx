@@ -4,30 +4,47 @@ import { Button } from '../Button/Button'
 import { useEffect, useState } from 'react'
 import style from './Form.module.css'
 import React, { FC } from 'react'
+import { MessageList } from '../../App'
 
-interface Message {
+interface formProps {
+  chatId: string
+  messageList: MessageList
+  setMessageList: React.Dispatch<React.SetStateAction<MessageList>>
+}
+export interface Message {
   author: string
   text: string
   date: string
 }
 
-export const Form: FC = () => {
+export const Form: FC<formProps> = ({
+  chatId,
+  messageList,
+  setMessageList,
+}) => {
   const [message, setMessage] = useState<Message>({
     author: '',
     text: '',
     date: '',
   })
-  const [messageList, setMessageList] = useState<Message[]>([])
+
   const RBT_MSG = 'Hello.I am robot.'
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     const time = new Date()
-    setMessageList((prev) => [
-      ...prev,
-      { ...message, author: 'User', date: time.toLocaleTimeString() },
-    ])
+    if (chatId) {
+      setMessageList((prev) => {
+        return {
+          ...prev,
+          [chatId]: [
+            ...prev[chatId],
+            { ...message, author: 'User', date: time.toLocaleTimeString() },
+          ],
+        }
+      })
+    }
     setMessage({
       author: '',
       text: '',
@@ -36,23 +53,36 @@ export const Form: FC = () => {
   }
 
   useEffect(() => {
-    if (messageList.length > 0 && messageList.slice(-1)[0].author !== 'Robot') {
+    if (
+      chatId &&
+      messageList[chatId].length > 0 &&
+      messageList[chatId].slice(-1)[0].author !== 'Robot'
+    ) {
       const time = new Date()
       const timeout = setTimeout(() => {
-        setMessageList((prev) => [
-          ...prev,
-          { author: 'Robot', text: RBT_MSG, date: time.toLocaleTimeString() },
-        ])
+        setMessageList((prev) => {
+          return {
+            ...prev,
+            [chatId]: [
+              ...prev[chatId],
+              {
+                author: 'Robot',
+                text: RBT_MSG,
+                date: time.toLocaleTimeString(),
+              },
+            ],
+          }
+        })
       }, 1500)
       return () => {
         clearTimeout(timeout)
       }
     }
-  }, [messageList])
+  }, [messageList[chatId]])
 
   return (
     <form className={style.form} action="" onSubmit={handleClick}>
-      <Message messages={messageList} />
+      <Message chatId={chatId} messages={messageList} />
       <div className={style.formFunc}>
         <Input
           data={message.text}
