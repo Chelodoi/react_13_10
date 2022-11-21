@@ -7,7 +7,8 @@ import { Header } from './FuncComponent/Header'
 import { Chats } from './pages/Chats'
 import { Home } from './pages/Home'
 import { Profile } from './pages/Profile'
-
+import { Provider } from 'react-redux'
+import { store } from './store'
 export interface Chat {
   id: string
   name: string
@@ -33,31 +34,33 @@ export const App: FC = () => {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Header />}>
-          <Route index element={<Home />}></Route>
-          <Route path="profile" element={<Profile />}></Route>
-          <Route path="chats">
-            <Route
-              index
-              element={<ChatList chatList={chatList} onAddChat={onAddChat} />}
-            />
-            <Route
-              path=":chatId"
-              element={
-                <Chats
-                  messageList={messageList}
-                  setMessageList={setMessageList}
-                  chatList={chatList}
-                  onAddChat={onAddChat}
-                />
-              }
-            />
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route index element={<Home />}></Route>
+            <Route path="profile" element={<Profile />}></Route>
+            <Route path="chats">
+              <Route
+                index
+                element={<ChatList chatList={chatList} onAddChat={onAddChat} />}
+              />
+              <Route
+                path=":chatId"
+                element={
+                  <Chats
+                    messageList={messageList}
+                    setMessageList={setMessageList}
+                    chatList={chatList}
+                    onAddChat={onAddChat}
+                  />
+                }
+              />
+            </Route>
           </Route>
-        </Route>
-        <Route path="*" element={<h2>404</h2>}></Route>
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<h2>404</h2>}></Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   )
 }
