@@ -1,31 +1,34 @@
-import { nanoid } from 'nanoid'
 import React, { FC, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Chat } from '../App'
+import { addChat, deleteChat } from '../store/chats/action'
+import { selectChatList } from '../store/chats/selectors'
 
-interface ChatListProps {
-  chatList: Chat[]
-  onAddChat: (chat: Chat) => void
-}
-export const ChatList: FC<ChatListProps> = ({ chatList, onAddChat }) => {
+export const ChatList: FC = () => {
   const [value, setValue] = useState('')
+
+  const dispatch = useDispatch()
+
+  const chatList = useSelector(
+    selectChatList,
+    (prev, next) => prev.length === next.length
+  )
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (value) {
-      onAddChat({
-        id: nanoid(),
-        name: value,
-      })
+      dispatch(addChat(value))
       setValue('')
     }
   }
+
   return (
     <>
       <ul>
         {chatList.map((chat) => (
           <li key={chat.id}>
             <Link to={`/chats/${chat.name}`}>{chat.name}</Link>
+            <button onClick={() => dispatch(deleteChat(chat.name))}>x</button>
           </li>
         ))}
       </ul>

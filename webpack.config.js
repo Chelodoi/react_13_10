@@ -4,11 +4,19 @@ const path = require('path')
 module.exports = {
   entry: path.resolve(__dirname, './src/index.tsx'),
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.[chunkhash].js',
+    clean: true,
     path: path.resolve(__dirname, './build'),
+    environment: {
+      arrowFunction: false,
+    },
   },
   resolve: {
     extensions: ['.jsx', '.js', '.tsx', '.ts'],
+    alias: {
+      components: path.resolve(__dirname, 'src/FuncComponent/'),
+      src: path.resolve(__dirname, 'src'),
+    },
   },
   devtool: 'eval-source-map',
   devServer: {
