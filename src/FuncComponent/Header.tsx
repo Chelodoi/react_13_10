@@ -17,6 +17,11 @@ const navigate = [
     to: '/chats',
     name: 'Chats',
   },
+  {
+    id: '4',
+    to: '/exampleConect',
+    name: 'Example Connect',
+  },
 ]
 export const Header: FC = () => {
   return (

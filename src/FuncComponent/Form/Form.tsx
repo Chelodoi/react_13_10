@@ -1,96 +1,73 @@
-import { Message } from '../Message/Message';
-import { Input } from '../Input/Input';
-import { Button } from '../Button/Button';
-import { useEffect, useState } from 'react';
-import style from './Form.module.css';
-import React, { FC } from 'react';
-import { MessageList } from '../../App';
+import { Message } from '../Message/Message'
+import { Input } from '../Input/Input'
+import { Button } from '../Button/Button'
+import { useEffect, useState } from 'react'
+import style from './Form.module.css'
+import React, { FC } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectChats } from '../../store/chats/selectors'
+import { addMessage } from '../../store/chats/action'
 
 interface formProps {
-  chatId: string;
-  messageList: MessageList;
-  setMessageList: React.Dispatch<React.SetStateAction<MessageList>>;
-}
-export interface Message {
-  author: string;
-  text: string;
-  date: string;
+  chatId: string
 }
 
-export const Form: FC<formProps> = ({
-  chatId,
-  messageList,
-  setMessageList,
-}) => {
-  const [message, setMessage] = useState<Message>({
-    author: '',
-    text: '',
-    date: '',
-  });
+export const Form: FC<formProps> = ({ chatId }) => {
+  const [message, setMessage] = useState<string>('')
 
-  const RBT_MSG = 'Hello.I am robot.';
+  const RBT_MSG = 'Hello.I am robot.'
+
+  const chats = useSelector(selectChats)
+
+  const dispatch = useDispatch()
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const time = new Date();
+    e.preventDefault()
     if (chatId) {
-      setMessageList((prev) => {
-        return {
-          ...prev,
-          [chatId]: [
-            ...prev[chatId],
-            { ...message, author: 'User', date: time.toLocaleTimeString() },
-          ],
-        };
-      });
+      dispatch(addMessage(chatId, message))
     }
-    setMessage({
-      author: '',
-      text: '',
-      date: '',
-    });
-  };
+    setMessage('')
+  }
 
-  useEffect(() => {
-    if (
-      chatId &&
-      messageList[chatId].length > 0 &&
-      messageList[chatId].slice(-1)[0].author !== 'Robot'
-    ) {
-      const time = new Date();
-      const timeout = setTimeout(() => {
-        setMessageList((prev) => {
-          return {
-            ...prev,
-            [chatId]: [
-              ...prev[chatId],
-              {
-                author: 'Robot',
-                text: RBT_MSG,
-                date: time.toLocaleTimeString(),
-              },
-            ],
-          };
-        });
-      }, 1500);
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, [messageList[chatId]]);
+  // useEffect(() => {
+  //   if (
+  //     chatId &&
+  //     chats[chatId].length > 0 &&
+  //     chats[chatId].slice(-1)[0].author !== 'Robot'
+  //   ) {
+  //     const time = new Date()
+  //     const timeout = setTimeout(() => {
+  //       setMessageList((prev) => {
+  //         return {
+  //           ...prev,
+  //           [chatId]: [
+  //             ...prev[chatId],
+  //             {
+  //               author: 'Robot',
+  //               text: RBT_MSG,
+  //               date: time.toLocaleTimeString(),
+  //             },
+  //           ],
+  //         }
+  //       })
+  //     }, 1500)
+  //     return () => {
+  //       clearTimeout(timeout)
+  //     }
+  //   }
+  // }, [messageList[chatId]])
 
   return (
     <form className={style.form} action="" onSubmit={handleClick}>
-      <Message chatId={chatId} messages={messageList} />
+      <Message chatId={chatId} />
       <div className={style.formFunc}>
         <Input
-          data={message.text}
+          data={message}
           placeholder="Введите сообщение"
-          changeMessage={setMessage}
+          onChange={(e) => setMessage(e.target.value)}
         />
-        <Button disabled={!message.text} />
+        <Button disabled={!message} />
       </div>
     </form>
-  );
-};
+  )
+}

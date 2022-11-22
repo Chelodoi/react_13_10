@@ -2,35 +2,27 @@ import React, { FC } from 'react'
 import { ChatList } from '../FuncComponent/ChatList'
 import { useParams, Navigate } from 'react-router-dom'
 import { Form } from '../FuncComponent/Form/Form'
-import { Chat, MessageList } from '../App'
+import { useSelector } from 'react-redux'
+import { selectChats } from '../store/chats/selectors'
 
-interface ChatsProps {
-  messageList: MessageList
-  setMessageList: React.Dispatch<React.SetStateAction<MessageList>>
-  chatList: Chat[]
-  onAddChat: (chat: Chat) => void
+export interface Chat {
+  id: string
+  name: string
 }
 
-export const Chats: FC<ChatsProps> = ({
-  chatList,
-  messageList,
-  setMessageList,
-  onAddChat,
-}) => {
+export const Chats: FC = () => {
   const { chatId } = useParams()
 
-  if (chatId && !messageList[chatId]) {
+  const chats = useSelector(selectChats)
+
+  if (chatId && !chats[chatId]) {
     return <Navigate replace to="/chats" />
   }
 
   return (
     <>
-      <ChatList chatList={chatList} onAddChat={onAddChat} />
-      <Form
-        chatId={chatId ? chatId : ''}
-        messageList={messageList}
-        setMessageList={setMessageList}
-      />
+      <ChatList />
+      <Form chatId={chatId ? chatId : ''} />
     </>
   )
 }

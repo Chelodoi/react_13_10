@@ -1,27 +1,19 @@
-import style from './Input.module.css';
-import React, { FC, Dispatch, SetStateAction } from 'react';
+import style from './Input.module.css'
+import React, { FC } from 'react'
 interface InputProps {
-  changeMessage: Dispatch<SetStateAction<Message>>;
-  placeholder?: string;
-  data?: string;
-}
-interface Message {
-  author: string;
-  text: string;
-  date: string;
+  placeholder?: string
+  data?: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Input: FC<InputProps> = ({ changeMessage, placeholder, data }) => {
-  function changeInput(ev: React.ChangeEvent<HTMLInputElement>) {
-    changeMessage((p) => ({ ...p, text: ev.target.value }));
-  }
+export const Input: FC<InputProps> = ({ placeholder, data, onChange }) => {
   return (
     <input
       className={style.input}
       value={data}
       placeholder={placeholder}
       type="text"
-      onChange={changeInput}
+      onChange={onChange}
     />
-  );
-};
+  )
+}
