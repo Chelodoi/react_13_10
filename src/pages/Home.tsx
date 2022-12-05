@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC } from 'react';
 export const Home: FC = () => {
-  return <h2>Home</h2>
-}
+  return <h2>Home</h2>;
+};

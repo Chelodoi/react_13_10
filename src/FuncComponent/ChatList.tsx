@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { addChat, deleteChat } from '../store/chats/action'
+import { Link, Navigate } from 'react-router-dom'
+import { addChat, deleteChat } from 'src/store/chats/slice'
+// import { deleteChat } from '../store/chats/action'
 import { selectChatList } from '../store/chats/selectors'
 
 export const ChatList: FC = () => {
@@ -18,7 +19,9 @@ export const ChatList: FC = () => {
     e.preventDefault()
     if (value) {
       dispatch(addChat(value))
+      const src = 'value'
       setValue('')
+      return <Navigate replace to={`/${src}`} />
     }
   }
 

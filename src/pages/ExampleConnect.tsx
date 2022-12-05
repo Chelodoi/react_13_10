@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { connect } from 'react-redux'
 import { StoreState } from '../store'
-import { toggleProfile } from '../store/profile/action'
+import { toggleProfile } from '../store/profile/slice'
 import { Dispatch } from 'redux'
 interface ExampleConnectProps {
   visible: boolean
