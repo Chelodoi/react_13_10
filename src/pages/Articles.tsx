@@ -1,25 +1,30 @@
-import React, { FC, useEffect, useState } from 'react';
-import { api } from 'src/COSTANTS';
-
-interface Article {
-  id: string;
-  title: string;
-}
+import React, { FC, useEffect } from 'react'
+import { CircularProgress } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectArticle } from 'src/store/articles/selector'
+import { ArticleState, fetchArticles } from 'src/store/articles/slice'
+import { ThunkDispatch } from 'redux-thunk'
 
 export const Articles: FC = () => {
-  const [loading, setLoading] = useState(false);
-  const [articles, setArticles] = useState<Article[]>([]);
+  const dispatch = useDispatch<ThunkDispatch<ArticleState, void, any>>()
+  const { error, articles, isLoading } = useSelector(selectArticle)
+
   useEffect(() => {
-    setLoading(true);
-    fetch(api)
-      .then((res) => res.json())
-      .then((data) => setArticles(data))
-      .finally(() => setLoading(false));
-  }, []);
+    console.log()
+    dispatch(fetchArticles())
+  }, [])
+
   return (
     <>
       <h2>Articles</h2>
-      {loading && <div>Loading...</div>}
+      {isLoading && <CircularProgress />}
+      <button onClick={() => dispatch(fetchArticles())}>reload</button>
+      <ul>
+        {articles.map((article) => (
+          <li key={article.id}>{article.title}</li>
+        ))}
+      </ul>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </>
-  );
-};
+  )
+}

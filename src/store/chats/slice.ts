@@ -3,14 +3,14 @@ import {
   createSlice,
   Dispatch,
   PayloadAction,
-} from '@reduxjs/toolkit';
-import { AddMessage, Message, MessageList } from './types';
+} from '@reduxjs/toolkit'
+import { AddMessage, Message, MessageList } from './types'
 
 const initialState: MessageList = {
   gb: [{ author: 'User comp', text: 'Hello', date: '21/01/1998' }],
-};
+}
 
-let timeout: NodeJS.Timeout;
+let timeout: NodeJS.Timeout
 
 // const addMessageWithReply = () => async (dispatch) => {
 //   dispatch(usersLoading());
@@ -23,21 +23,21 @@ const chatsSlice = createSlice({
   initialState,
   reducers: {
     addChat: (state, action: PayloadAction<string>) => {
-      state[action.payload] = [];
+      state[action.payload] = []
     },
     deleteChat: (state, action: PayloadAction<string>) => {
-      delete state[action.payload];
+      delete state[action.payload]
     },
     addMessage: (state, action: PayloadAction<AddMessage>) => {
-      const time = new Date();
+      const time = new Date()
       state[action.payload.chatId].push({
         author: action.payload.message.author,
         date: time.toLocaleTimeString(),
         text: action.payload.message.text,
-      });
+      })
     },
   },
-});
+})
 
 export const addMessageWithReply = createAsyncThunk(
   'chats/addMessageWithReply',
@@ -45,11 +45,11 @@ export const addMessageWithReply = createAsyncThunk(
     { chatId, message }: { chatId: string; message: Message },
     { dispatch }
   ) => {
-    dispatch(addMessage({ chatId, message }));
+    dispatch(addMessage({ chatId, message }))
 
     if (message.author !== 'Robot') {
       if (timeout) {
-        clearTimeout(timeout);
+        clearTimeout(timeout)
       }
 
       timeout = setTimeout(() => {
@@ -61,11 +61,11 @@ export const addMessageWithReply = createAsyncThunk(
               text: 'Hello, motherfucker',
             },
           })
-        );
-      }, 1500);
+        )
+      }, 1500)
     }
   }
-);
+)
 
 // const addMessageWithReply = () => async (dispatch) => {
 //   dispatch(usersLoading());
@@ -73,6 +73,6 @@ export const addMessageWithReply = createAsyncThunk(
 //   dispatch(usersReceived(response.data));
 // };
 
-export const { addChat, deleteChat, addMessage } = chatsSlice.actions;
+export const { addChat, deleteChat, addMessage } = chatsSlice.actions
 
-export const chatsReducer = chatsSlice.reducer;
+export const chatsReducer = chatsSlice.reducer
