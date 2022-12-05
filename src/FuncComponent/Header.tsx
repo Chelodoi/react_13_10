@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { FC } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 
 const navigate = [
   {
@@ -27,7 +27,7 @@ const navigate = [
     to: '/articles',
     name: 'Articles',
   },
-]
+];
 export const Header: FC = () => {
   return (
     <header>
@@ -48,5 +48,5 @@ export const Header: FC = () => {
         <Outlet />
       </main>
     </header>
-  )
-}
+  );
+};

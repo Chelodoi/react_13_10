@@ -1,14 +1,14 @@
-import style from './Message.module.css'
-import React, { FC } from 'react'
-import { nanoid } from 'nanoid'
-import { useSelector } from 'react-redux'
-import { selectChats } from 'src/store/chats/selectors'
+import style from './Message.module.css';
+import React, { FC } from 'react';
+import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
+import { selectChats } from 'src/store/chats/selectors';
 
 interface MessageProps {
-  chatId: string
+  chatId: string;
 }
 export const Message: FC<MessageProps> = ({ chatId }) => {
-  const chats = useSelector(selectChats)
+  const chats = useSelector(selectChats);
   return (
     <div className={style.message}>
       {chats[chatId].map((item) => (
@@ -21,5 +21,5 @@ export const Message: FC<MessageProps> = ({ chatId }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};

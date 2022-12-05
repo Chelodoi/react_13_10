@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
-import { connect } from 'react-redux'
-import { StoreState } from '../store'
-import { toggleProfile } from '../store/profile/slice'
-import { Dispatch } from 'redux'
+import React, { FC } from 'react';
+import { connect } from 'react-redux';
+import { StoreState } from '../store';
+import { toggleProfile } from '../store/profile/slice';
+import { Dispatch } from 'redux';
 interface ExampleConnectProps {
-  visible: boolean
-  toggle: () => void
+  visible: boolean;
+  toggle: () => void;
 }
 
 export const ExampleConnect: FC<ExampleConnectProps> = (props) => {
@@ -15,16 +15,16 @@ export const ExampleConnect: FC<ExampleConnectProps> = (props) => {
       <input type="checkbox" checked={props.visible} />
       <button onClick={() => props.toggle()}>change visible</button>
     </>
-  )
-}
+  );
+};
 const mapStateToProps = (state: StoreState) => ({
   visible: state.profile.visible,
-})
+});
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   toggle: () => dispatch(toggleProfile()),
-})
+});
 
 export const ExampleConnectFunction = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ExampleConnect)
+)(ExampleConnect);

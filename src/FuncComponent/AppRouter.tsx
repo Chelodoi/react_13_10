@@ -1,13 +1,13 @@
-import React, { FC, Suspense } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Articles } from 'src/pages/Articles'
+import React, { FC, Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Articles } from 'src/pages/Articles';
 
-import { Chats as ChatsComponent } from 'src/pages/Chats'
-import { ExampleConnectFunction } from 'src/pages/ExampleConnect'
-import { Home } from 'src/pages/Home'
-import { Profile } from 'src/pages/Profile'
-import { ChatList } from './ChatList'
-import { Header } from './Header'
+import { Chats as ChatsComponent } from 'src/pages/Chats';
+import { ExampleConnectFunction } from 'src/pages/ExampleConnect';
+import { Home } from 'src/pages/Home';
+import { Profile } from 'src/pages/Profile';
+import { ChatList } from './ChatList';
+import { Header } from './Header';
 
 const Chats = React.lazy(() =>
   Promise.all([
@@ -16,7 +16,7 @@ const Chats = React.lazy(() =>
     })),
     new Promise((resolve) => setTimeout(resolve, 1000)),
   ]).then(([moduleExports]) => moduleExports)
-)
+);
 
 export const AppRouter: FC = () => {
   return (
@@ -40,5 +40,5 @@ export const AppRouter: FC = () => {
         </Routes>
       </Suspense>
     </BrowserRouter>
-  )
-}
+  );
+};
