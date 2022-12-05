@@ -1,33 +1,41 @@
-import { Message } from '../Message/Message'
-import { Input } from '../Input/Input'
-import { Button } from '../Button/Button'
-import { useEffect, useState } from 'react'
-import style from './Form.module.css'
-import React, { FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectChats } from '../../store/chats/selectors'
-import { addMessage } from '../../store/chats/action'
+import { Message } from '../Message/Message';
+import { Input } from '../Input/Input';
+import { Button } from '../Button/Button';
 
+import React, { FC } from 'react';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { selectChats } from '../../store/chats/selectors';
+import { addMessageWithReply } from '../../store/chats/slice';
+import { AddMessages, MessageList } from 'src/store/chats/types';
+// import { Message } from 'src/store/chats/types'
+
+import style from './Form.module.css';
 interface formProps {
-  chatId: string
+  chatId: string;
 }
 
 export const Form: FC<formProps> = ({ chatId }) => {
-  const [message, setMessage] = useState<string>('')
+  const [message, setMessage] = useState({
+    author: 'User',
+    text: '',
+  });
 
-  const RBT_MSG = 'Hello.I am robot.'
+  const RBT_MSG = 'Hello.I am robot.';
 
-  const chats = useSelector(selectChats)
+  const chats = useSelector(selectChats);
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+  const dispatch = useDispatch<ThunkDispatch<MessageList, void, any>>();
 
   const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (chatId) {
-      dispatch(addMessage(chatId, message))
+      dispatch(addMessageWithReply({ chatId, message }));
     }
-    setMessage('')
-  }
+    setMessage({ ...message, text: '' });
+  };
 
   // useEffect(() => {
   //   if (
@@ -59,15 +67,19 @@ export const Form: FC<formProps> = ({ chatId }) => {
 
   return (
     <form className={style.form} action="" onSubmit={handleClick}>
-      <Message chatId={chatId} />
+      {chats[chatId] ? (
+        <Message chatId={chatId} />
+      ) : (
+        <div>Сообщений пока нет</div>
+      )}
       <div className={style.formFunc}>
         <Input
-          data={message}
+          data={message.text}
           placeholder="Введите сообщение"
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setMessage({ ...message, text: e.target.value })}
         />
         <Button disabled={!message} />
       </div>
     </form>
-  )
-}
+  );
+};

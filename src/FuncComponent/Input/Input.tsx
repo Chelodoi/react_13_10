@@ -1,9 +1,9 @@
-import style from './Input.module.css'
-import React, { FC } from 'react'
+import style from './Input.module.css';
+import React, { FC } from 'react';
 interface InputProps {
-  placeholder?: string
-  data?: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  placeholder?: string;
+  data?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const Input: FC<InputProps> = ({ placeholder, data, onChange }) => {
@@ -15,5 +15,5 @@ export const Input: FC<InputProps> = ({ placeholder, data, onChange }) => {
       type="text"
       onChange={onChange}
     />
-  )
-}
+  );
+};

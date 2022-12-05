@@ -1,26 +1,29 @@
-import React, { FC, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { addChat, deleteChat } from '../store/chats/action'
-import { selectChatList } from '../store/chats/selectors'
+import React, { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Navigate } from 'react-router-dom';
+import { addChat, deleteChat } from 'src/store/chats/slice';
+// import { deleteChat } from '../store/chats/action'
+import { selectChatList } from '../store/chats/selectors';
 
 export const ChatList: FC = () => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const chatList = useSelector(
     selectChatList,
     (prev, next) => prev.length === next.length
-  )
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     if (value) {
-      dispatch(addChat(value))
-      setValue('')
+      dispatch(addChat(value));
+      const src = 'value';
+      setValue('');
+      return <Navigate replace to={`/${src}`} />;
     }
-  }
+  };
 
   return (
     <>
@@ -41,5 +44,5 @@ export const ChatList: FC = () => {
         <button type="submit">add chat</button>
       </form>
     </>
-  )
-}
+  );
+};
