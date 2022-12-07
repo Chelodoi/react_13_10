@@ -1,10 +1,10 @@
-import { ChatsActions, MessageList } from './types';
-import { Reducer } from 'redux';
-import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './action';
+import { ChatsActions, MessageList } from './types'
+import { Reducer } from 'redux'
+import { ADD_CHAT, ADD_MESSAGE, DELETE_CHAT } from './action'
 
 const initialState: MessageList = {
   gb: [{ author: 'User comp', text: 'Hello', date: '21/01/1998' }],
-};
+}
 
 // export const chatsReducer: Reducer<MessageList, ChatsActions> = (
 //   state = initialState,
