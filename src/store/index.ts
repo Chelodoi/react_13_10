@@ -1,7 +1,7 @@
 import { compose, combineReducers } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { MessageList } from './chats/types'
-import { ProfileState } from './profile/reducer'
+import { ProfileState } from './profile/slice'
 import {
   persistStore,
   persistReducer,
@@ -14,7 +14,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { profileReducer } from './profile/slice'
-import { chatsReducer } from './chats/slice'
+import { chatsReducer, ChatState } from './chats/slice'
 import { articlesReducer, ArticleState } from './articles/slice'
 
 export const composeEnhancers =
@@ -22,14 +22,14 @@ export const composeEnhancers =
 
 export interface StoreState {
   profile: ProfileState
-  chats: MessageList
+  chats: ChatState
   article: ArticleState
 }
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['profile'],
+  blacklist: ['profile', 'chats'],
 }
 
 const rootReducer = combineReducers<StoreState>({

@@ -1,17 +1,15 @@
-import style from './Message.module.css';
-import React, { FC } from 'react';
-import { nanoid } from 'nanoid';
-import { useSelector } from 'react-redux';
-import { selectChats } from 'src/store/chats/selectors';
+import style from './Message.module.css'
+import React, { FC } from 'react'
+import { nanoid } from 'nanoid'
+import { Message as MessageType } from 'src/store/chats/types'
 
 interface MessageProps {
-  chatId: string;
+  messages: MessageType[]
 }
-export const Message: FC<MessageProps> = ({ chatId }) => {
-  const chats = useSelector(selectChats);
+export const Message: FC<MessageProps> = ({ messages }) => {
   return (
     <div className={style.message}>
-      {chats[chatId].map((item) => (
+      {messages.map((item) => (
         <div key={nanoid()} className={style.messageBlock}>
           <div className={style.messageBlockTop}>
             <span className={style.messageAuthor}>{item.author}</span>
@@ -21,5 +19,5 @@ export const Message: FC<MessageProps> = ({ chatId }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
